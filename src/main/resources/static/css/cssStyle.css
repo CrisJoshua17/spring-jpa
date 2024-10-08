@@ -1,0 +1,47 @@
+/* Estilo para el contenedor de la lista desplegable del autocompletado */
+.ui-autocomplete {
+    background-color: #4f4f4f !important;
+    max-height: 200px !important; /* Aumenta la altura máxima para ver más elementos */
+    overflow-y: auto !important;
+    font-family: 'Arial', sans-serif !important;
+    font-size: 20px !important; /* Ajuste de tamaño de fuente */
+    z-index: 1000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 22% !important; /* Asegúrate de que ocupe el ancho del contenedor */
+    box-sizing: border-box !important; /* Incluye el padding y el borde en el cálculo del ancho */
+}
+
+/* Estilo para los elementos de la lista */
+.ui-menu-item {
+    padding: 4px 8px !important; /* Padding ajustado */
+    color: #4f4f4f !important; /* Color gris */
+    background-color: white !important;
+    font-size: 12px !important; /* Tamaño de fuente reducido */
+    white-space: nowrap !important; /* Evita el desbordamiento del texto */
+    overflow: hidden !important; /* Oculta el texto desbordado */
+    text-overflow: ellipsis !important; /* Muestra "..." si el texto es muy largo */
+}
+
+/* Estilo para el elemento seleccionado (hover) */
+.ui-state-active, 
+.ui-menu-item:hover {
+    background-color: #4f4f4f !important; /* Fondo del elemento seleccionado */
+    color: #000000 !important; /* Color del texto del elemento seleccionado */
+    font-size: 15px !important; /* Tamaño de fuente en hover */
+    font-weight: bold !important; /* Negrita */
+    border-radius: 4px !important; /* Bordes redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1) !important; /* Sombra para destacar */
+    background-clip: padding-box !important;
+}
+
+/* Cambiar el estilo del input de búsqueda */
+#buscar_producto {
+    width: 100% !important; /* Aumenta el ancho */
+    padding: 12px !important; /* Aumenta el padding para que sea más alto */
+    
+    border-radius: 4px !important;
+    font-size: 16px !important; /* Aumenta el tamaño de la fuente */
+    color: black !important;
+    background-color: white !important;
+}

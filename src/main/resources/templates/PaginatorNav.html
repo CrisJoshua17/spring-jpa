@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <nav th:fragment="paginator">
+    <ul class="pagination">
+
+      <!-- Botón Primera Página -->
+      <li th:class="'page-item ' + (${page.first} ? 'disabled' : '')">
+        <a th:href="${not page.first} ? @{${page.url}(page=0)} : ''" class="page-link" th:text="#{text.paginator.first}">
+          <i class="fas fa-angle-double-left" ></i> Primera
+        </a>
+      </li>
+
+      <!-- Botón Anterior -->
+      <li th:class="'page-item ' + (${page.hasPrevious} ? '' : 'disabled')">
+        <a th:href="${page.hasPrevious} ? @{${page.url}(page=${page.paginaActual-2})} : ''" class="page-link" 
+        th:utext="#{text.paginator.previous}">
+          <i class="fas fa-angle-left" ></i> Anterior
+        </a>
+      </li>
+
+      <!-- Botón Siguiente -->
+      <li th:class="'page-item ' + (${page.hasNext} ? '' : 'disabled')">
+        <a th:href="${page.hasNext} ? @{${page.url}(page=${page.paginaActual})} : ''" class="page-link"
+         th:utext="#{text.paginator.next}">
+          Siguiente <i class="fas fa-angle-right"></i>
+        </a>
+      </li>
+
+      <!-- Botón Última Página -->
+      <li th:class="'page-item ' + (${page.last} ? 'disabled' : '')">
+        <a th:href="${not page.last} ? @{${page.url}(page=${page.totalPaginas-1})} : ''" class="page-link"
+        th:text="#{text.paginator.last}">
+          Última <i class="fas fa-angle-double-right"></i>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</body>
+</html>
