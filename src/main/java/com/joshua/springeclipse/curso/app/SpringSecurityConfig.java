@@ -40,52 +40,6 @@ import com.joshua.springeclipse.curso.app.models.services.JpaUserDetailsService;
 	     private JpaUserDetailsService userDetailsService;
 	   
 	    
-	    ///la parte comentado es para usuarios emn memoria local, se cambia el metodo para usuarios en base de datos
-	
-	   /* @Bean
-	    public UserDetailsService userDetailsService() throws Exception {
-	        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-	
-	        // Definir roles sin el prefijo "ROLE_"
-	        manager.createUser(User.withUsername("user")
-	                               .password(passwordEncoder().encode("user"))
-	                               .roles("USER") // Sin "ROLE_" aquí
-	                               .build());
-	
-	        manager.createUser(User.withUsername("admin")
-	                               .password(passwordEncoder().encode("admin"))
-	                               .roles("ADMIN") // Sin "ROLE_" aquí
-	                               .build());
-	
-	        return manager;
-	    }*/
-	
-	   /* @Bean
-	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	        http.authorizeHttpRequests(authz -> authz
-	                //.requestMatchers("/", "/css/**", "/js/**", "/images/**", "/listar").permitAll()
-	               // .requestMatchers("/ver/**", "/uploads/**").hasRole("USER") 
-	                //.requestMatchers("/form/**", "/eliminar/**", "/factura/**").hasRole("ADMIN") 
-	              //  .anyRequest().authenticated()
-	        		.requestMatchers("/loggin", "/listar", "/", "/css/**", "/js/**", "/images/**").permitAll() // Acceso público
-	                .anyRequest().authenticated() 
-	        		)
-	        .formLogin(login -> login
-	                .loginPage("/loggin")
-	                .defaultSuccessUrl("/listar", true).successHandler(logginSucces)
-	                .failureUrl("/loggin?error")
-	                .permitAll())
-	        .logout(logout -> logout
-	                .logoutUrl("/logout")
-	                .logoutSuccessUrl("/loggin?logout=true")
-	                .permitAll()).exceptionHandling((exceptionHandling) ->
- 				exceptionHandling
- 					.accessDeniedPage("/error_403"));
-	        return http.build();
-	        
-	       
-		
-	    }*/
 	    
 	    
 	    @Bean
@@ -108,14 +62,7 @@ import com.joshua.springeclipse.curso.app.models.services.JpaUserDetailsService;
 	        return http.build();
 	    }
 	    
-	  /*  @Autowired
-	   public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
-	    	build.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
-	    	.usersByUsernameQuery("select username,password,enabled from users where username=?")
-	    	.authoritiesByUsernameQuery("select u.username, a.authority from authorities a "
-            		+ "inner join users u on (a.user_id=u.id) where u.username=?");
-	    }
-	    */
+	
 	    
 	    
 	    @Autowired

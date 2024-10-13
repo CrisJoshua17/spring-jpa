@@ -28,7 +28,7 @@ package com.joshua.springeclipse.curso.app;
 			flashManager.saveOutputFlashMap(flashMap, request, response);
 			
 			
-			//super.onAuthenticationSuccess(request, response, authentication);
+			
 		}
 		
 		
