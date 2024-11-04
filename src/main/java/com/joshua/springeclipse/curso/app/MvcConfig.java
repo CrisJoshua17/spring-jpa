@@ -63,8 +63,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		@Bean
 		public Jaxb2Marshaller jaxb2() {
 			Jaxb2Marshaller  marshaller = new Jaxb2Marshaller();
-			marshaller.setClassesToBeBound(new Class[] {com.joshua.springeclipse.curso.app.view.xml.ClienteList.class});
-			return marshaller;
+			marshaller.setClassesToBeBound(new Class[] { 
+				com.joshua.springeclipse.curso.app.view.xml.ClienteList.class,
+				com.joshua.springeclipse.curso.app.models.entity.Cliente.class,
+				com.joshua.springeclipse.curso.app.models.entity.Factura.class // Añadir Cliente aquí
+			});			return marshaller;
 		}
 		
 }

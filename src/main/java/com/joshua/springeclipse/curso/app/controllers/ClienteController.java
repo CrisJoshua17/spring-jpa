@@ -2,7 +2,6 @@ package com.joshua.springeclipse.curso.app.controllers;
 
 import java.net.MalformedURLException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -40,6 +39,7 @@ import com.joshua.springeclipse.curso.app.view.xml.ClienteList;
 import jakarta.validation.Valid;
 
 @Controller
+@SuppressWarnings("null")
 public class ClienteController {
 
 	@Autowired
@@ -55,6 +55,7 @@ public class ClienteController {
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@GetMapping(value="/uploads/{filename:.+}")
+	@SuppressWarnings({"CallToPrintStackTrace"})
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename){
 		Resource recurso =null; 
 		

@@ -7,23 +7,23 @@ import com.joshua.springeclipse.curso.app.models.entity.Cliente;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-
-@XmlRootElement(name="clientes")
+@XmlRootElement(name = "clientes")
 public class ClienteList {
-	
-	@XmlElement(name="cliente")
-	public List<Cliente> clientes;
 
-	public ClienteList() {}
+    private List<Cliente> clientes;
 
+    public ClienteList() {}
 
-	public ClienteList(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
+    public ClienteList(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
 
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
+    @XmlElement(name = "cliente")  // Define cada elemento en la lista como "cliente"
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
 
-
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
 }

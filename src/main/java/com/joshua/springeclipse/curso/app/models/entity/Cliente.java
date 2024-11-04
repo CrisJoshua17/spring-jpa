@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -33,130 +32,112 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="clientes")
 public class Cliente implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	
-	@NotEmpty
-	private String name;
+    @NotEmpty
+    private String name;
 
-	
-	@NotEmpty
-	@Column(name="LASTNAME")
-	private String lastName;
+    @NotEmpty
+    @Column(name="LASTNAME")
+    private String lastName;
 
-	
-	@NotEmpty
-	@Email
-	private String email;
+    @NotEmpty
+    @Email
+    private String email;
 
-	
-	@NotNull
-	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@JsonFormat(pattern ="yyyy/MM/dd" )
-	private Date createAt;
-	
-	
-	private String foto;
-	
-	@OneToMany(mappedBy = "cliente" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-	@JsonManagedReference
-	private List<Factura> facturas;
-	
-	
-	
-	
-	
-	public Cliente() {
-	facturas= new ArrayList<>();
-	}
+    @NotNull
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern ="yyyy/MM/dd")
+    private Date createAt;
 
+    private String foto;
 
-	public void addFactura(Factura factura) {
-		facturas.add(factura);
-	}
-	
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Factura> facturas;
 
-	public List<Factura> getFacturas() {
-		return facturas;
-	}
+    public Cliente() {
+        facturas = new ArrayList<>();
+    }
 
-	public void setFacturas(List<Factura> facturas) {
-		this.facturas = facturas;
-	}
+    public void addFactura(Factura factura) {
+        facturas.add(factura);
+    }
 
-	public String getFoto() {
-		return foto;
-	}
+    @XmlElement
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public String getFoto() {
+        return foto;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
-	@XmlElement(name="cliente")
-	public String getName() {
-		return name;
-	}
+    @XmlElement(name="id")  // Corregido
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@XmlElement(name="cliente")
-	public String getLastName() {
-		return lastName;
-	}
+    @XmlElement(name="name")  // Corregido
+    public String getName() {
+        return name;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@XmlElement
-	public String getEmail() {
-		return email;
-	}
+    @XmlElement(name="lastName")  // Corregido
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	@XmlElement
-	public Date getCreateAt() {
-		return createAt;
-	}
+    @XmlElement(name="email")  // Corregido
+    public String getEmail() {
+        return email;
+    }
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    @XmlElement(name="createAt")  // Corregido
+    public Date getCreateAt() {
+        return createAt;
+    }
 
-	private static final long serialVersionUID = 1L;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
+    private static final long serialVersionUID = 1L;
 
-
-
-	@Override
-	public String toString() {
-		return  name + " " + lastName;
-	}
-
-	
-	
-	
-	
+    @Override
+    public String toString() {
+        return name + " " + lastName;
+    }
 }
