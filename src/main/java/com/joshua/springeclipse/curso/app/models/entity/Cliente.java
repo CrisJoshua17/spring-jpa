@@ -29,7 +29,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "clientes")
-@XmlRootElement(name="clientes")
+@XmlRootElement(name="cliente")
 public class Cliente implements Serializable {
 
     @Id
@@ -68,7 +68,7 @@ public class Cliente implements Serializable {
         facturas.add(factura);
     }
 
-    @XmlElement
+    @XmlElement(name="facturas")
     public List<Factura> getFacturas() {
         return facturas;
     }
@@ -77,6 +77,7 @@ public class Cliente implements Serializable {
         this.facturas = facturas;
     }
 
+    
     public String getFoto() {
         return foto;
     }
@@ -121,7 +122,7 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    @XmlElement(name="createAt")  // Corregido
+    @XmlElement(name="Fecha")
     public Date getCreateAt() {
         return createAt;
     }

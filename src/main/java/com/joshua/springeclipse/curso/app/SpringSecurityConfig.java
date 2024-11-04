@@ -15,6 +15,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 	import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 	import org.springframework.security.web.SecurityFilterChain;
+	import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+	import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+	import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.joshua.springeclipse.curso.app.models.services.JpaUserDetailsService;
 	
@@ -86,28 +89,44 @@ import com.joshua.springeclipse.curso.app.models.services.JpaUserDetailsService;
 	       
 		
 	    }*/
+
+
 	    
-	    
-	    @Bean
-	    SecurityFilterChain filterChain(HttpSecurity http) throws Exception { 
-	        http.authorizeHttpRequests(authz -> authz
-	                .requestMatchers("/", "/css/**", "/js/**", "/images/**", "/listar","/loggin","/locale","listar**")
-	                .permitAll()
-	                .anyRequest().authenticated())
-	             .formLogin(login -> login
-	                     .loginPage("/loggin")
-	                     .defaultSuccessUrl("/listar", true).successHandler(logginSucces)
-	                     .failureHandler(logginFail)
-	                     .permitAll())
-	            .logout(logout -> logout
-	                    .logoutUrl("/logout")
-	                    .logoutSuccessUrl("/loggin?logout=true")
-	                    .permitAll()).exceptionHandling((exceptionHandling) ->
-	                exceptionHandling
-	                    .accessDeniedPage("/error_403"));
-	        return http.build();
-	    }
-	    
+
+
+	   @Bean
+	public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+    MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
+
+    http.authorizeHttpRequests(authz -> authz
+            .requestMatchers(mvcMatcherBuilder.pattern("/"), 
+                             mvcMatcherBuilder.pattern("/css/**"), 
+                             mvcMatcherBuilder.pattern("/js/**"), 
+                             mvcMatcherBuilder.pattern("/images/**"), 
+                             mvcMatcherBuilder.pattern("/listar"),
+                             mvcMatcherBuilder.pattern("/loggin"),
+                             mvcMatcherBuilder.pattern("/locale"),
+                             mvcMatcherBuilder.pattern("/listar**")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+            .anyRequest().authenticated())
+        .formLogin(login -> login
+            .loginPage("/loggin")
+            .defaultSuccessUrl("/listar", true).successHandler(logginSucces)
+            .failureHandler(logginFail)
+            .permitAll())
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/loggin?logout=true")
+            .permitAll())
+        .exceptionHandling(exceptionHandling -> exceptionHandling
+            .accessDeniedPage("/error_403"));
+
+    // Si estás usando H2 Console, necesitas deshabilitar CSRF y frame options para ella
+    http.csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")));
+    http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+
+    return http.build();
+}
 	  /*  @Autowired
 	   public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
 	    	build.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())

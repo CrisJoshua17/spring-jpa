@@ -66,7 +66,12 @@ public class MvcConfig implements WebMvcConfigurer {
 			marshaller.setClassesToBeBound(new Class[] { 
 				com.joshua.springeclipse.curso.app.view.xml.ClienteList.class,
 				com.joshua.springeclipse.curso.app.models.entity.Cliente.class,
-				com.joshua.springeclipse.curso.app.models.entity.Factura.class // Añadir Cliente aquí
+				com.joshua.springeclipse.curso.app.models.entity.Factura.class,
+				com.joshua.springeclipse.curso.app.models.entity.ItemFactura.class,
+				com.joshua.springeclipse.curso.app.models.entity.Producto.class
+				
+				// Añadir Cliente aquí
+
 			});			return marshaller;
 		}
 		
